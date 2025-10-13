@@ -21,9 +21,9 @@ def create_user(username, age, city, hobby):
 def get_user(username):   
     conn = get_conn()
     cur = conn.cursor()
-    cur.execute(
-        "SELECT * FROM users WHERE username = ?;",
-        (username,)
+    cur.execute
+    (
+        "SELECT * FROM users WHERE username = ?;", (username,)
     )
     user = cur.fetchone()
     conn.close()
