@@ -17,7 +17,8 @@ def init_db() -> None:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
         age INTEGER,
-        city TEXT
+        city TEXT,
+        hobby TEXT
     );
     """)
 
