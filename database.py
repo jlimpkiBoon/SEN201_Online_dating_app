@@ -29,6 +29,7 @@ def init_db() -> None:
         username TEXT NOT NULL references users(username) ON DELETE CASCADE,
         receiver TEXT NOT NULL,
         content TEXT NOT NULL,
+        read INTEGER DEFAULT 0,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
      );     
      """)
