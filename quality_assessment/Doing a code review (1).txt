@@ -1,0 +1,23 @@
+﻿Source code file: user_repo.py
+
+
+Author: Boon
+Reviewer : Pepper, Thiri
+Scribe: Ryuki
+
+
+Function purposed
+
+
+* create_user(username, age, city, hobby) : inserts a user with a unique username.
+* get_user(username) : fetches one row (SQLite Row)
+* update_user(username, age, city, hobby) : updates fields by username
+* delete_user(username) : delete account by username
+
+
+Problem and issues found 
+
+
+1. Type ambiguity from CLI : The function in user_repo didn’t check the attribute of the user input 
+2. No ensuring message such as return values: create_user function doesn't return anything like a user is successfully created.
+3. Input validation: the function accepts input without validation from the user into the database.
