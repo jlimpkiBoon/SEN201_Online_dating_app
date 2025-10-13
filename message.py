@@ -8,19 +8,20 @@ def send_message(sender, receiver, content):
     cur = conn.cursor()
     cur.execute
     (
-        "INSERT INTO messages (username, receiver, content) VALUES (?, ?, ?, ?);",
+        "INSERT INTO messages (username, receiver, content) VALUES (?, ?, ?);",
         (sender, receiver, content)
     )
     conn.commit()
     conn.close()
     print("Message sent successfully!")
 
-def view_messages(username):
+def view_messages(sender, receiver):
     conn = get_conn()
     cur = conn.cursor()
     cur.execute
     (
-        "SELECT * FROM messages WHERE receiver = ? ORDER BY timestamp DESC;", (username,)
+        "SELECT * FROM messages WHERE (username = ? AND receiver = ?) ORDER BY timestamp;",
+        (sender, receiver)
     )
     messages = cur.fetchall()
     conn.close()
