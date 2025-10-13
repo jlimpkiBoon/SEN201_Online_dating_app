@@ -1,13 +1,27 @@
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user
 
+def check_blank(question):
+    while True:
+        answer = input(question).strip()
+        if answer:
+            return answer
+        print("Input cannot be blank. Please try again.")
+
 print("welcome to dating app")
 
 new = input("Are you a new user? (yes/no): ").strip().lower()
 if new == 'yes':
     create = input("Do you want to create a new account? (yes/no): ").strip().lower()
-    print("create account")
-    print("checking if username exists")
+    if create == 'yes':
+        username = check_blank("Enter your username: ")
+        age = check_blank("Enter your age: ")
+        city = check_blank("Enter your city: ")
+        hobby = check_blank("Enter your hobby: ")
+        create_user(username, age, city, hobby)
+    else:
+        print("Exiting the application.")
+        exit()
 #while True:
 username = input("Enter your username: ").strip()
 print("checking if username exists")
