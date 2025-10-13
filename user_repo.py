@@ -32,7 +32,8 @@ def get_user(username):
 def update_user(username, age, city, hobby):
     conn = get_conn()
     cur = conn.cursor()
-    cur.execute(
+    cur.execute
+    (
         "UPDATE users SET age = ?, city = ?, hobby = ? WHERE username = ?;",
         (age, city, hobby, username)
     )
@@ -50,6 +51,7 @@ def delete_user(username):
     conn.commit()
     conn.close()
     print("User deleted successfully!")
+
              
 
 
