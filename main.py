@@ -6,7 +6,7 @@ from message import send_message, view_messages
 print("welcome to dating app")
 new = input("Are you a new user? (yes/no): ").strip().lower()
 if new == 'yes':
-    create = input("Do you want to create a new account? (yes/no): ").strip().lower()
+    create = check_blank("Do you want to create a new account? (yes/no): ").strip().lower()
     if create == 'yes':
         username = check_blank("Enter your username: ").lower()
         age = check_blank("Enter your age: ")
@@ -17,7 +17,7 @@ if new == 'yes':
         print("Exiting the application.")
         exit()
 #while True:
-username = input("Enter your username: ").strip()
+username = check_blank("Enter your username: ").strip()
 print("checking if username exists")
 print(f"Hello, {username}!")
 
