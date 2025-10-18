@@ -52,6 +52,33 @@ def delete_user(username):
     conn.close()
     print("User deleted successfully!")
 
+def view_profile(username):
+    user = get_user(username)
+    if user:
+        print(f"Username: {user['username']}")
+        print(f"Age: {user['age']}")
+        print(f"City: {user['city']}")
+        print(f"Hobby: {user['hobby']}")
+    else:
+        print("User not found.")
+
+def edit_profile(username):
+    user = get_user(username)
+    if not user:
+        print("User not found.")
+        return
+
+    print("Leave a field blank to keep the current value.")
+    age = input(f"Enter new age (current: {user['age']}): ").strip()
+    city = input(f"Enter new city (current: {user['city']}): ").strip()
+    hobby = input(f"Enter new hobby (current: {user['hobby']}): ").strip()
+
+    age = age if age else user['age']
+    city = city if city else user['city']
+    hobby = hobby if hobby else user['hobby']
+
+    update_user(username, age, city, hobby) 
+
              
 
 
