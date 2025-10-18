@@ -17,7 +17,9 @@ def init_db() -> None:
             username TEXT NOT NULL UNIQUE,
             age INTEGER,
             city TEXT,
-            hobby TEXT
+            hobby TEXT,
+            gender TEXT,
+            language TEXT
         );
     """)
 

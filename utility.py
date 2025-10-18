@@ -1,7 +1,21 @@
 import numbers
 
-def is_number(value):
-        return isinstance(value, numbers.Number)
+def check_number(question):
+    while True:
+        value = input(question).strip()
+        if not value:
+            print("Input cannot be blank. Please try again.")
+            continue
+
+        try:
+            # Automatically detect integer or float
+            if '.' in value:
+                return float(value)
+            else:
+                return int(value)
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
 
 def check_blank(question):
     while True:
