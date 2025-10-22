@@ -1,6 +1,6 @@
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user, view_profile, edit_profile
-from utility import is_number, check_blank
+from utility import check_blank
 from message import send_message, view_messages
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']
 

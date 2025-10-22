@@ -3,6 +3,7 @@ from user_repo import create_user, get_user, update_user, delete_user, view_prof
 from utility import check_number, check_blank
 from message import send_message, view_messages
 from matching import match_users
+from note import create_note, get_notes, get_notes_by_user
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']  
 
 print("welcome to dating app")
@@ -19,7 +20,7 @@ if new == 'yes':
         hobby = check_blank("Enter your hobby: ").lower()
         gender = check_blank("Enter your gender: ").lower()
         language = check_blank("Enter your speak language: ").lower()
-        create_user(username, age, city, hobby)
+        create_user(username, age, city, hobby, gender, language)
     else:
         print("Exiting the application.")
         exit()
@@ -70,9 +71,29 @@ while True:
     elif choice == '5':
         print("view messages")
     elif choice == '6':
-        print("write note")
+        about_user = check_blank("Who is your note about? ").strip()
+        content = input("Note content: ").strip()
+        create_note(username, about_user, content)
+        print("Note successfully created!\n")
+
+
     elif choice == '7':
-        print("view notes")
+        print("\n")
+        print("1.View all notes")
+        print("2.Search note by username")
+        
+
+        choice = input("Enter your choice: ").strip()
+        if choice == '1':
+            get_notes(username)
+        elif choice == '2':
+            print("\n")
+            about_user = check_blank("Who do you want yo search your note about? ").strip()
+            get_notes_by_user(username, about_user)
+        else:
+            print("Invalid choice. Please try again.")
+
+
     elif choice == '8':
         print("exit")
         break
