@@ -14,10 +14,10 @@ def match_users(city, hobby, min_age, max_age, prefer_gender, language, username
 
         # NULL-safe string compares
         if (user["city"] or "").lower() == city.lower():
-            score += 30
+            score += 20
 
         if (user["hobby"] or "").lower() == hobby.lower():
-            score += 25
+            score += 40
 
         # Age scoring (guard against None)
         age = user["age"]
@@ -25,14 +25,14 @@ def match_users(city, hobby, min_age, max_age, prefer_gender, language, username
             if min_age <= age <= max_age:
                 score += 20
             elif age < min_age - 5 or age > max_age + 5:
-                score -= 10
+                score -= 20
 
         # Preference matches (NULL-safe)
         if (user["gender"] or "").lower() == prefer_gender.lower():
-            score += 15
+            score += 100
 
         if (user["language"] or "").lower() == language.lower():
-            score += 10
+            score += 20
 
         # Do NOT shadow the function parameter 'language'
         user_gender = user["gender"] or "unknown"

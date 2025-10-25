@@ -41,12 +41,12 @@ else:
 
 while True:
     print("\n")
-    print("1.Change account")
-    print("2.Edit Profil")
-    print("3.Find match")
-    print("4.Send message")
+    print("1.Change Account")
+    print("2.Edit Profile")
+    print("3.Find Match")
+    print("4.Send Message")
     print("5.View Messages")
-    print("6.Write note")
+    print("6.Write Note")
     print("7.View Notes")
     print("8.Exit")
     choice = check_blank("Enter your choice: ")
