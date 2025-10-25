@@ -23,3 +23,7 @@ def check_blank(question):
         if answer:
             return answer
         print("Input cannot be blank. Please try again.")
+
+def press_enter_to_continue():
+    input("\nPress Enter to continue...")
+
