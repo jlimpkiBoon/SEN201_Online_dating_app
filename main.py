@@ -104,9 +104,8 @@ while True:
     elif choice == '4':
         print("\n")
         receiver = check_blank("Enter the username of the person you want to message: ").strip()
-        content = input("Enter your message: ").strip()
+        content = check_blank("Enter your message: ").strip()
         send_message(username, receiver, content)
-        print("Message sent successfully!\n")
         press_enter_to_continue()
 
     elif choice == '5':

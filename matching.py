@@ -50,6 +50,7 @@ def match_users(city, hobby, min_age, max_age, prefer_gender, language, username
 
     # Sort by best match
     matches.sort(key=lambda x: x["score"], reverse=True)
+    top_matches = matches[:5]
 
     conn.close()
-    return matches
+    return top_matches
