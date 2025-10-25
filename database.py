@@ -43,6 +43,18 @@ def init_db() -> None:
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
     """)
+      
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS notifications(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,           -- who receives the notification
+            type TEXT NOT NULL,               -- e.g. 'new_message'
+            from_user TEXT,                   -- who triggered it
+            content_preview TEXT,             -- small message preview
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            seen INTEGER DEFAULT 0            -- 0 = unseen, 1 = seen
+        );
+    """)
 
     conn.commit()
     conn.close()
