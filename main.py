@@ -51,6 +51,8 @@ while True:
     print("8.Exit")
     choice = check_blank("Enter your choice: ")
 
+
+
     if choice == '1':
         print("\n")
         username = check_blank("Enter your new username: ").strip()
@@ -84,6 +86,7 @@ while True:
             print("Profile not edited.")
             press_enter_to_continue()
 
+
     elif choice == '3':
         print("\n")
         match_city = check_blank("Enter the city to find matches: ").lower()
@@ -101,12 +104,14 @@ while True:
                 print(f"Username: {match['username']}, Age: {match['age']}, City: {match['city']}, Hobby: {match['hobby']}, Gender: {match['gender']}")
         press_enter_to_continue()
 
+
     elif choice == '4':
         print("\n")
         receiver = check_blank("Enter the username of the person you want to message: ").strip()
         content = check_blank("Enter your message: ").strip()
         send_message(username, receiver, content)
         press_enter_to_continue()
+
 
     elif choice == '5':
         print("\n")
@@ -130,6 +135,7 @@ while True:
         else:
             print("Invalid choice. Please try again.")
             press_enter_to_continue()
+
 
     elif choice == '6':
         print("\n")
