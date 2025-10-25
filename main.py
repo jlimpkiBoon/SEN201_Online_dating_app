@@ -30,6 +30,7 @@ print("checking if username exists")
 print(f"Hello, {username}!")
 
 while True:
+    print("\n")
     print("1.Change account")
     print("2.Edit Profil")
     print("3.Find match")
@@ -39,12 +40,15 @@ while True:
     print("7.View Notes")
     print("8.Exit")
     choice = check_number("Enter your choice: ").strip()
+
     if choice == '1':
+        print("\n")
         username = check_blank("Enter your new username: ").strip()
         if not get_user(username):
             print("Username not found. Please create an account first.")
             exit()
         if get_user(username):
+            print("\n")
             print(f"Hello, {username}!")
             unread = get_unread_count(username)
             if unread > 0:
@@ -59,6 +63,7 @@ while True:
             
     elif choice == '2':
         view_profile(username)
+        print("\n")
         edit = check_blank("Do you want to edit your profile? (yes/no): ").strip().lower()
         if edit == 'yes':
             edit_profile(username)
@@ -66,6 +71,7 @@ while True:
             print("Profile not edited.")
 
     elif choice == '3':
+        print("\n")
         match_city = check_blank("Enter the city to find matches: ").lower()
         for i, hobby in enumerate(hobbies, start=1):
             print(f"{i}. {hobby}")
@@ -81,6 +87,7 @@ while True:
                 print(f"Username: {match['username']}, Age: {match['age']}, City: {match['city']}, Hobby: {match['hobby']}, Gender: {match['gender']}")
 
     elif choice == '4':
+        print("\n")
         receiver = check_blank("Enter the username of the person you want to message: ").strip()
         content = input("Enter your message: ").strip()
         send_message(username, receiver, content)
@@ -106,6 +113,7 @@ while True:
             print("Invalid choice. Please try again.")
 
     elif choice == '6':
+        print("\n")
         about_user = check_blank("Who is your note about? ").strip()
         content = input("Note content: ").strip()
         create_note(username, about_user, content)
@@ -128,7 +136,8 @@ while True:
 
 
     elif choice == '8':
-        print("exit")
+        print("\n")
+        print("Exit")
         break
     else:
         print("Invalid choice. Please try again.")
