@@ -1,0 +1,8 @@
+# Core database
+sqlite3    # built-in, included for clarity
+
+# Optional: CLI styling and formatting (if you want nicer output)
+colorama>=0.4.6
+
+# Optional: for packaging or running on any environment
+setuptools>=65.0.0

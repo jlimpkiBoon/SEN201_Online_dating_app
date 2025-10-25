@@ -34,8 +34,8 @@ if unread > 0:
     msgs = fetch_unread_messages(username)
     for m in msgs:
         print(f"[{m['timestamp']}] {m['sender']} → You: {m['content']}")
-        mark_unread_as_read(username)
-        press_enter_to_continue()
+    mark_unread_as_read(username)
+    press_enter_to_continue()
 else:
     print("No unread messages.\n")
 
