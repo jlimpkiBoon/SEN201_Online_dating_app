@@ -38,9 +38,12 @@ while True:
     print("6.write note")
     print("7.View Notes")
     print("8.Exit")
-    choice = input("Enter your choice: ").strip()
+    choice = check_number("Enter your choice: ").strip()
     if choice == '1':
         username = check_blank("Enter your new username: ").strip()
+        if not get_user(username):
+            print("Username not found. Please create an account first.")
+            exit()
         if get_user(username):
             print(f"Hello, {username}!")
             unread = get_unread_count(username)
@@ -52,9 +55,6 @@ while True:
                 mark_unread_as_read(username)
             else:
                 print("No unread messages.\n")
-
-        else:
-            print("Username does not exist.")
         
             
     elif choice == '2':
@@ -64,6 +64,7 @@ while True:
             edit_profile(username)
         else: 
             print("Profile not edited.")
+
     elif choice == '3':
         match_city = check_blank("Enter the city to find matches: ").lower()
         for i, hobby in enumerate(hobbies, start=1):
@@ -78,10 +79,32 @@ while True:
             print("Matched Users:")
             for match in matches:
                 print(f"Username: {match['username']}, Age: {match['age']}, City: {match['city']}, Hobby: {match['hobby']}, Gender: {match['gender']}")
+
     elif choice == '4':
-        print("send message")
+        receiver = check_blank("Enter the username of the person you want to message: ").strip()
+        content = input("Enter your message: ").strip()
+        send_message(username, receiver, content)
+
     elif choice == '5':
-        print("view messages")
+        print("\n")
+        print("1.View all messages with a user")
+        print("2.View conversation with a user and mark incoming messages as read")
+        choice = check_number("Enter your choice: ")
+        if choice == '1':
+            other_user = check_blank("Enter the username of the user to view messages with: ").strip()
+            messages = view_conversation(username, other_user)
+            for m in messages:
+                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
+                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
+        elif choice == '2':
+            other_user = check_blank("Enter the username of the user to view conversation with: ").strip()
+            messages = view_conversation(username, other_user, mark_read_for=username)
+            for m in messages:
+                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
+                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
+        else:
+            print("Invalid choice. Please try again.")
+
     elif choice == '6':
         about_user = check_blank("Who is your note about? ").strip()
         content = input("Note content: ").strip()
@@ -93,9 +116,7 @@ while True:
         print("\n")
         print("1.View all notes")
         print("2.Search note by username")
-        
-
-        choice = input("Enter your choice: ").strip()
+        choice = check_number("Enter your choice: ")
         if choice == '1':
             get_notes(username)
         elif choice == '2':
