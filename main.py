@@ -1,7 +1,7 @@
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user, view_profile, edit_profile
 from utility import check_number, check_blank
-from message import send_message, view_messages
+from message import send_message, get_unread_count, fetch_unread_messages, mark_unread_as_read, view_conversation
 from matching import match_users
 from note import create_note, get_notes, get_notes_by_user
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']  
@@ -43,8 +43,20 @@ while True:
         username = check_blank("Enter your new username: ").strip()
         if get_user(username):
             print(f"Hello, {username}!")
+            unread = get_unread_count(username)
+            if unread > 0:
+                print(f"\n🔔 You have {unread} unread message(s). Showing them now:\n")
+                msgs = fetch_unread_messages(username)
+                for m in msgs:
+                    print(f"[{m['timestamp']}] {m['sender']} → You: {m['content']}")
+                mark_unread_as_read(username)
+            else:
+                print("No unread messages.\n")
+
         else:
             print("Username does not exist.")
+        
+            
     elif choice == '2':
         view_profile(username)
         edit = check_blank("Do you want to edit your profile? (yes/no): ").strip().lower()
