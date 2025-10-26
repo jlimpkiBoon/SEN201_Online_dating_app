@@ -24,6 +24,7 @@ if new == 'yes':
     else:
         print("Exiting the application.")
         exit()
+
 #while True:
 username = check_blank("Enter your username: ").strip()
 print(f"\nHello, {username}!")
@@ -112,7 +113,7 @@ while True:
         match_city = check_blank("Enter the city to find matches: ").lower()
         for i, hobby in enumerate(hobbies, start=1):
             print(f"{i}. {hobby}")
-        match_hobby = check_blank("Enter the hobby to find matches: ").lower()
+        match_hobby = check_blank("Enter the hobby to find matches(input text): ").lower()
         maximum_age = check_number("Enter the maximum age to find matches: ")
         minimum_age = check_number("Enter the minimum age to find matches: ")
         prefer_gender = check_blank("Enter preferred gender to find matches: ").lower()
@@ -192,6 +193,7 @@ while True:
         print()
         print("Exit")
         break
+    
     else:
         print("Invalid choice. Please try again.")
 
