@@ -1,9 +1,11 @@
+from database import init_db
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user, view_profile, edit_profile
 from utility import  check_blank, press_enter_to_continue, check_number
 from message import send_message, get_unread_count, fetch_unread_messages, mark_unread_as_read, view_conversation
 from matching import match_users
 from note import create_note, get_notes, get_notes_by_user
+init_db()
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']  
 
 print("Welcome to dating app")
