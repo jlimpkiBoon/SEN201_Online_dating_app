@@ -41,6 +41,9 @@ else:
 
 while True:
     print()
+    print("-----------------------------------")
+    print("Main Menu:")
+    print("-----------------------------------")
     print("1.Change Account")
     print("2.Edit Profile")
     print("3.Find Match")
