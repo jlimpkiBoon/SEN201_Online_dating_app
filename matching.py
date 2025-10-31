@@ -5,7 +5,7 @@ def match_users(city, hobby, min_age, max_age, prefer_gender, language, username
     conn = db.get_conn()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM users WHERE username != ?;", (username,))
+    cur.execute("SELECT * FROM users WHERE username != ? AND LOWER(gender) = LOWER(?);", (username, prefer_gender))
     all_users = cur.fetchall()
 
     matches = []
@@ -26,10 +26,6 @@ def match_users(city, hobby, min_age, max_age, prefer_gender, language, username
                 score += 20
             elif age < min_age - 5 or age > max_age + 5:
                 score -= 20
-
-        # Preference matches (NULL-safe)
-        if (user["gender"] or "").lower() == prefer_gender.lower():
-            score += 100
 
         if (user["language"] or "").lower() == language.lower():
             score += 20

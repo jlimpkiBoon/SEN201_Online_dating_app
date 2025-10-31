@@ -18,14 +18,14 @@ if new == 'yes':
         city = check_blank("Enter your city: ").lower()
         print("Please select your hobby from the following options:")
         for i, hobby in enumerate(hobbies, start=1):
-            print(f"{hobby}")
+            print(f"{i}.{hobby}")
         while True:
             hobby = check_blank("Enter your hobby: ").lower()
             if hobby in hobbies:
                 break
             else:
                 print("Invalid hobby. Please choose from the listed options.")
-        gender = check_blank("Enter your gender: ").lower()
+        gender = check_blank("Enter your gender(male/female): ").lower()
         language = check_blank("Enter your speak language: ").lower()
         create_user(username, age, city, hobby, gender, language)
     else:
@@ -131,13 +131,15 @@ while True:
                 print("Invalid hobby. Please choose from the listed options.")
         maximum_age = check_number("Enter the maximum age to find matches: ")
         minimum_age = check_number("Enter the minimum age to find matches: ")
-        prefer_gender = check_blank("Enter preferred gender to find matches: ").lower()
+        prefer_gender = check_blank("Enter preferred gender to find matches(male/female): ").lower()
         language = check_blank("Enter preferred language to find matches: ").lower()
         matches = match_users(match_city, match_hobby, minimum_age, maximum_age, prefer_gender, language, username)
         if matches:
             print("\nMatched Users:")
             for match in matches:
                 print(f"Username: {match['username']}, Age: {match['age']}, City: {match['city']}, Hobby: {match['hobby']}, Gender: {match['gender']}")
+        else :
+            print("No matches found.")
         press_enter_to_continue()
 
 
