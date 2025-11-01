@@ -157,30 +157,15 @@ while True:
 
     elif choice == '5':
         print()
-        print("1.View all messages with a user")
-        print("2.View conversation with a user and mark incoming messages as read")
-        choice = check_blank("Enter your choice: ")
-        if choice == '1':
-            other_user = check_blank("Enter the username of the user to view messages with: ").strip()
-            messages = view_conversation(username, other_user)
-            for m in messages:
-                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
-                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
-            if not messages:
-                print("No messages found with this user.")
-            press_enter_to_continue()
-        elif choice == '2':
-            other_user = check_blank("Enter the username of the user to view conversation with: ").strip()
-            messages = view_conversation(username, other_user, mark_read_for=username)
-            for m in messages:
-                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
-                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
-            if not messages:
-                print("No messages found with this user.")
-            press_enter_to_continue()
-        else:
-            print("Invalid choice. Please try again.")
-            press_enter_to_continue()
+        other_user = check_blank("Enter the username of the user to view messages with: ").strip()
+        messages = view_conversation(username, other_user)
+        for m in messages:
+            direction = "You →" if m['sender'] == username else f"{m['sender']} →"
+            print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
+        if not messages:
+            print("No messages found with this user.")
+        press_enter_to_continue()
+       
 
 
     elif choice == '6':
