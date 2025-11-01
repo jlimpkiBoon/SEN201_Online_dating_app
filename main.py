@@ -32,8 +32,12 @@ if new == 'yes':
         print("Exiting the application.")
         exit()
 
-#while True:
-username = check_blank("Enter your username: ").strip()
+while True:
+    username = check_blank("Enter your username: ").strip()
+    if get_user(username):
+        break
+    else:
+        print("Username does not exist. Please try again.")
 print(f"\nHello, {username}!")
 unread = get_unread_count(username)
 if unread > 0:
@@ -181,7 +185,12 @@ while True:
 
     elif choice == '6':
         print()
-        about_user = check_blank("Who is your note about? ").strip()
+        while True:
+            about_user = check_blank("Who is your note about? ").strip()
+            if get_user(about_user):
+                break
+            else:
+                print("Username does not exist. Please try again.")
         content = check_blank("Note content: ").strip()
         create_note(username, about_user, content)
         print("Note successfully created!\n")
