@@ -1,3 +1,11 @@
+"""
+file: main.py
+purpose: Command-line interface for a simple dating app that handles user accounts,
+         matching, messaging, and note-taking functionalities.
+author: Boon
+date: 2025-09-29
+"""
+
 from database import init_db
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user, view_profile, edit_profile
@@ -8,6 +16,7 @@ from note import create_note, get_notes, get_notes_by_user
 init_db()
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']  
 
+# Application Start: User Login or Account Creation
 print("Welcome to dating app")
 new = check_blank("Are you a new user? (yes/no): ").strip().lower()
 if new == 'yes':
@@ -50,6 +59,7 @@ if unread > 0:
 else:
     print("No unread messages.\n")
 
+# Main Application Menu Loop
 while True:
     print()
     print("-----------------------------------")
@@ -65,7 +75,7 @@ while True:
     print("8.Exit")
     choice = check_blank("Enter your choice: ")
 
-
+    # Option 1: Change Account (create new or switch)
     if choice == '1':
         print()
         print("1. Create a new account")
@@ -107,7 +117,7 @@ while True:
                 else:
                     print("No unread messages.\n")
         
-            
+     # Option 2: View or Edit Profile 
     elif choice == '2':
         print()
         view_profile(username)
@@ -121,7 +131,7 @@ while True:
             print("Profile not edited.")
             press_enter_to_continue()
 
-
+    # Option 3: Find a Match Based on Criteria
     elif choice == '3':
         print()
         match_city = check_blank("Enter the city to find matches: ").lower()
@@ -146,7 +156,7 @@ while True:
             print("No matches found.")
         press_enter_to_continue()
 
-
+    # Option 4: Send a Message
     elif choice == '4':
         print()
         receiver = check_blank("Enter the username of the person you want to message: ").strip()
@@ -154,7 +164,7 @@ while True:
         send_message(username, receiver, content)
         press_enter_to_continue()
 
-
+    # Option 5: View Messages or Conversations
     elif choice == '5':
         print()
         other_user = check_blank("Enter the username of the user to view messages with: ").strip()
@@ -166,8 +176,7 @@ while True:
             print("No messages found with this user.")
         press_enter_to_continue()
        
-
-
+    # Option 6: Write a Note About Another User
     elif choice == '6':
         print()
         while True:
@@ -181,7 +190,7 @@ while True:
         print("Note successfully created!\n")
         press_enter_to_continue()
 
-
+    # Option 7: View Notes
     elif choice == '7':
         print()
         print("1.View all notes")
@@ -199,7 +208,7 @@ while True:
             print("Invalid choice. Please try again.")
             press_enter_to_continue()
 
-
+    # Option 8: Exit Application
     elif choice == '8':
         print()
         print("Exit")

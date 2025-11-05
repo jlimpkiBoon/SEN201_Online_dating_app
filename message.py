@@ -1,8 +1,22 @@
-# message.py
+# file: message.py
+# purpose: Manage user-to-user messaging, including sending, reading, and viewing message history
+# author: Pepper & Thiri
+# date: 2025-09-29
+
 from database import get_conn, init_db
 from datetime import datetime
 
 def send_message(sender, receiver, content):
+    """
+    Send a message from one user to another and store it in the database.
+
+    Args:
+        sender (str): Username of the message sender.
+        receiver (str): Username of the message receiver.
+        content (str): The message text to be sent.
+
+    Returns: None
+    """
     init_db()
     conn = get_conn()
     cur = conn.cursor()
@@ -15,6 +29,15 @@ def send_message(sender, receiver, content):
     print("Message sent successfully!")
 
 def get_unread_count(username):
+    """
+    Retrieve the count of unread messages for a given user.
+
+    Args:
+        username (str): Username of the message receiver.
+
+    Returns:
+        int: The number of unread messages for the user.
+    """
     conn = get_conn()
     cur = conn.cursor()
     cur.execute(
@@ -26,6 +49,15 @@ def get_unread_count(username):
     return row["c"] if row else 0
 
 def fetch_unread_messages(username):
+    """
+    Fetch all unread messages for a specific user, sorted by timestamp.
+
+    Args:
+        username (str): Username of the message receiver.
+
+    Returns:
+        list[dict]: A list of unread messages with sender, content, and timestamp.
+    """
     conn = get_conn()
     cur = conn.cursor()
     cur.execute(
@@ -42,6 +74,14 @@ def fetch_unread_messages(username):
     return [dict(r) for r in rows]
 
 def mark_unread_as_read(username):
+    """
+    Mark all unread messages for a given user as read.
+
+    Args:
+        username (str): Username of the message receiver.
+
+    Returns: None
+    """
     conn = get_conn()
     cur = conn.cursor()
     cur.execute(
@@ -53,9 +93,16 @@ def mark_unread_as_read(username):
 
 def view_conversation(user_a, user_b, *, mark_read_for=None):
     """
-    Return all messages between user_a and user_b (both directions),
-    sorted by time. If mark_read_for is set (e.g., the viewer username),
-    mark any incoming messages to that viewer as read.
+    Retrieve all messages exchanged between two users, sorted by time.
+    Optionally, mark incoming messages as read for one of the users.
+
+    Args:
+        user_a (str): First user in the conversation.
+        user_b (str): Second user in the conversation.
+        mark_read_for (str, optional): Username for whom incoming messages will be marked as read.
+
+    Returns:
+        list[dict]: A list of messages (both directions) including sender, receiver, content, and timestamp.
     """
     conn = get_conn()
     cur = conn.cursor()
