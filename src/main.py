@@ -72,7 +72,9 @@ while True:
     print("5.View Messages")
     print("6.Write Note")
     print("7.View Notes")
-    print("8.Exit")
+    print("8.List all contacted users")
+    print("9.Exit")
+    print("-----------------------------------")
     choice = check_blank("Enter your choice: ")
 
     # Option 1: Change Account (create new or switch)
@@ -167,29 +169,13 @@ while True:
     # Option 5: View Messages or Conversations
     elif choice == '5':
         print()
-        print("1.View all contacted users")
-        print("2.View conversation with a user")
-        sub_choice = check_blank("Enter your choice: ")
-        # View all contacted users
-        if sub_choice == '1':
-            print()
-            contacts = get_contacted_users(username)
-            if contacts:
-                print("Contacted Users:")
-                for c in contacts:
-                    print(f"- {c}")
-            else:
-                print("You have not contacted any users yet.")
-            press_enter_to_continue()
-        elif sub_choice == '2':
-            print()
-            other_user = check_blank("Enter the username of the user to view messages with: ").strip()
-            messages = view_conversation(username, other_user)
-            for m in messages:
-                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
-                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
-            if not messages:
-                print("No messages found with this user.")
+        other_user = check_blank("Enter the username of the user to view messages with: ").strip()
+        messages = view_conversation(username, other_user)
+        for m in messages:
+            direction = "You →" if m['sender'] == username else f"{m['sender']} →"
+            print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
+        if not messages:
+            print("No messages found with this user.")
             press_enter_to_continue()
         else:
             print("Invalid choice. Please try again.")
@@ -227,11 +213,25 @@ while True:
             print("Invalid choice. Please try again.")
             press_enter_to_continue()
 
-    # Option 8: Exit Application
-    elif choice == '8':
+    # Option 9: List all contacted users
+    elif choice == '9':
+        print()
+        print("Contacted Users:")
+        contacts = get_contacted_users(username)
+        if contacts:
+            for c in contacts:
+                print(f"- {c}")
+        else:
+            print("You have not contacted any users yet.")
+        press_enter_to_continue()
+
+    # Option 9: Exit Application
+    elif choice == '9':
         print()
         print("Exit")
         break
+
+    
     
     else:
         print("Invalid choice. Please try again.")
