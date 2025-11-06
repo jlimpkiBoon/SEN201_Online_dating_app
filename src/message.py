@@ -132,3 +132,35 @@ def view_conversation(user_a, user_b, *, mark_read_for=None):
 
     conn.close()
     return [dict(r) for r in rows]
+
+def get_contacted_users(username):
+    """
+    Retrieve a list of all unique users that the given user has either
+    sent messages to or received messages from.
+
+    Args:
+        username (str): The username of the current user.
+
+    Returns:
+        list[str]: A list of distinct usernames that have interacted with the user.
+    """
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT DISTINCT other_user FROM (
+            SELECT receiver AS other_user
+            FROM messages
+            WHERE username = ?
+            UNION
+            SELECT username AS other_user
+            FROM messages
+            WHERE receiver = ?
+        )
+        ORDER BY other_user COLLATE NOCASE;
+        """,
+        (username, username)
+    )
+    rows = cur.fetchall()
+    conn.close()
+    return [r["other_user"] for r in rows]

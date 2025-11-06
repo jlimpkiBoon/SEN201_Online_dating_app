@@ -10,9 +10,9 @@ from database import init_db
 import database as db
 from user_repo import create_user, get_user, update_user, delete_user, view_profile, edit_profile
 from utility import  check_blank, press_enter_to_continue, check_number
-from message import send_message, get_unread_count, fetch_unread_messages, mark_unread_as_read, view_conversation
-from matching import match_users
+from message import send_message, get_unread_count, fetch_unread_messages, mark_unread_as_read, view_conversation, get_contacted_users
 from note import create_note, get_notes, get_notes_by_user
+from matching import match_users
 init_db()
 hobbies = ['reading', 'traveling', 'cooking', 'sports', 'music', 'gaming']  
 
@@ -167,15 +167,34 @@ while True:
     # Option 5: View Messages or Conversations
     elif choice == '5':
         print()
-        other_user = check_blank("Enter the username of the user to view messages with: ").strip()
-        messages = view_conversation(username, other_user)
-        for m in messages:
-            direction = "You →" if m['sender'] == username else f"{m['sender']} →"
-            print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
-        if not messages:
-            print("No messages found with this user.")
-        press_enter_to_continue()
-       
+        print("1.View all contacted users")
+        print("2.View conversation with a user")
+        sub_choice = check_blank("Enter your choice: ")
+        # View all contacted users
+        if sub_choice == '1':
+            print()
+            contacts = get_contacted_users(username)
+            if contacts:
+                print("Contacted Users:")
+                for c in contacts:
+                    print(f"- {c}")
+            else:
+                print("You have not contacted any users yet.")
+            press_enter_to_continue()
+        elif sub_choice == '2':
+            print()
+            other_user = check_blank("Enter the username of the user to view messages with: ").strip()
+            messages = view_conversation(username, other_user)
+            for m in messages:
+                direction = "You →" if m['sender'] == username else f"{m['sender']} →"
+                print(f"[{m['timestamp']}] {direction} {m['receiver']}: {m['content']}")
+            if not messages:
+                print("No messages found with this user.")
+            press_enter_to_continue()
+        else:
+            print("Invalid choice. Please try again.")
+            press_enter_to_continue()
+        
     # Option 6: Write a Note About Another User
     elif choice == '6':
         print()
